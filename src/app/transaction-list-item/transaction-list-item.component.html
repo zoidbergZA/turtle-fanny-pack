@@ -1,0 +1,28 @@
+<div *ngIf="transaction as tx" class="card-holder">
+  <mat-card>
+    <div class="container">
+      <span class="item-icon" *ngIf="tx?.amount > 0"><mat-icon color="primary">save_alt</mat-icon></span>
+      <span class="item-icon" *ngIf="tx?.amount < 0"><mat-icon color="accent">arrow_upward</mat-icon></span>
+      <div class="item-date">
+        <span>{{ tx?.timestamp | date:'shortTime' }}</span>
+      </div>
+      <div *ngIf="tx?.failed">
+        <span class="error-text">FAILED</span>
+      </div>
+      <div class="item-hash" *ngIf="!isCompact && !tx?.failed">
+        <span>{{ tx?.txHash }}</span>
+        <div *ngIf="tx?.transferType === 'account'" class="transfer-details">
+          <mat-chip-list>
+            <mat-chip color="accent" selected>Instant</mat-chip>
+          </mat-chip-list>
+          <span class="left-spacer">{{ tx?.accountTransferId }}</span>
+        </div>
+      </div>
+      <div class="item-spacer"></div>
+      <div class="item-amount" [ngClass]="{'received':tx?.amount > 0, 'sent':tx?.amount < 0 }">
+        <span *ngIf="tx?.amount > 0">+</span>
+        <span [ngClass]="{'unconfirmed-text':tx?.failed || (tx?.transferType === 'deposit' && !tx?.confirmed) }">{{ tx?.amount | TRTL }}</span>
+      </div>
+    </div>
+  </mat-card>
+</div>

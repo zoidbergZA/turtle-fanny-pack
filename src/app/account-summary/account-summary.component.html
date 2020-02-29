@@ -1,0 +1,17 @@
+<div *ngIf="account">
+  <div *ngIf="price" class="card-holder">
+    <mat-card>
+      <div>
+        <span class="balance-unlocked">{{ account?.balanceUnlocked | TRTL }}</span>
+        <span *ngIf="account?.balanceLocked > 0" class="balance-locked unconfirmed-text">(+{{ account?.balanceLocked | TRTL:true }})</span>
+      </div>
+      <div class="balance-fiat">{{ (price?.price * account?.balanceUnlocked * 0.01) | currency:'USD':'symbol':'1.2-6' }}</div>
+      <div class="trends-container">
+        <span class="trend-item"><mat-icon>trending_up</mat-icon></span>
+        <span class="trend-item" [ngClass]="{'trend-up': trend1h=='up', 'trend-down':trend1h=='down', 'trend-flat':trend1h=='flat' }">1h: {{ price.percent_change_1h * 0.01 | percent:'1.2-2' }}</span>
+        <span class="trend-item" [ngClass]="{'trend-up': trend24h=='up', 'trend-down':trend24h=='down', 'trend-flat':trend24h=='flat' }">24h: {{ price.percent_change_24h * 0.01 | percent:'1.2-2' }}</span>
+        <span class="trend-item" [ngClass]="{'trend-up': trend7d=='up', 'trend-down':trend7d=='down', 'trend-flat':trend7d=='flat' }">7d: {{ price.percent_change_7d * 0.01 | percent:'1.2-2' }}</span>
+      </div>
+    </mat-card>
+  </div>
+</div>

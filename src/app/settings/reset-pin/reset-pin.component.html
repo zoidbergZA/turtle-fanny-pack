@@ -1,0 +1,35 @@
+<div class="card-holder">
+  <mat-card class="page-card">
+    <div class="container">
+      <div class="page-title-small">reset pin</div>
+      <p class="error-text center-text">{{ errorMessage }}</p>
+      <div *ngIf="!working">
+        <div class="content-box">
+          <div *ngIf="!sent">
+            <p>
+              In order to reset your pin, click the button blow.
+              An email with instructions will be sent to the email address registered
+              to your account.
+            </p>
+            <button mat-stroked-button (click)="resetClick()">reset pin</button>
+          </div>
+          <div *ngIf="sent">
+            <mat-icon color="accent">check_circle</mat-icon>
+            <span class="left-spacer">email sent</span>
+            <p>
+              An email with instructions for resetting your pin has been sent
+              to <span class="emphasis">{{ email }}</span>.
+            </p>
+            <button mat-stroked-button (click)="homeClick()"><mat-icon>home</mat-icon> home</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="working">
+        <div *ngIf="working">
+          <working-spinner></working-spinner>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-spacer"></div>
+  </mat-card>
+</div>

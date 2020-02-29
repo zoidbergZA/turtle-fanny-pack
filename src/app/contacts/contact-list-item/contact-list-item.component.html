@@ -1,0 +1,11 @@
+<div *ngIf="contact">
+  <mat-card (click)="onClick()">
+    <mat-card-content>
+      <div class="contact-title">
+        <mat-icon color="primary">perm_contact_calendar</mat-icon>
+        <span class="contact-title-text">{{ contact?.name }}</span>
+      </div>
+      <p class="address">{{ contact?.address | truncateString }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

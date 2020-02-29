@@ -1,0 +1,61 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="isHandset ? 'dialog' : 'navigation'"
+      [mode]="isHandset ? 'over' : 'side'"
+      [opened]="isHandset === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item *ngIf="isHandset === false" routerLink="/dasboard">
+        <mat-icon>home</mat-icon>
+        <span class="menu-item">Home</span>
+      </a>
+      <a mat-list-item (click)="contactsClick()">
+        <mat-icon>contacts</mat-icon>
+        <span class="menu-item">Address book</span>
+      </a>
+      <a mat-list-item (click)="settingsClick()">
+        <mat-icon>settings_applications</mat-icon>
+        <span class="menu-item">Settings</span>
+      </a>
+      <!-- <a mat-list-item>
+        <mat-icon>contact_support</mat-icon>
+        <span class="menu-item">Info</span>
+      </a> -->
+      <a mat-list-item (click)="signOutClick()">
+        <mat-icon>lock</mat-icon>
+        <span class="menu-item">Sign out</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset && isDashboard">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <button
+        type="button"
+        aria-label="Home"
+        mat-icon-button
+        (click)="dashboardClick()"
+        *ngIf="isHandset && !isDashboard">
+        <mat-icon aria-label="Home icon">home</mat-icon>
+      </button>
+      <span class="fill-toolbar-space"></span>
+      <button mat-flat-button (click)="sendClick()" color="accent" class="action-button">
+        <mat-icon>arrow_upward</mat-icon> send
+      </button>
+      <button mat-flat-button (click)="receiveClick()" color="primary" class="action-button">
+        <mat-icon>save_alt</mat-icon> receive
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

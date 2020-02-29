@@ -1,0 +1,43 @@
+<mat-card class="page-card">
+  <mat-card-title class="page-title center-text">Sign in</mat-card-title>
+  <mat-card-content>
+    <div *ngIf="!working" id="sign-in-block">
+      <p class="error-text center-text">{{ errorMessage }}</p>
+      <form class="form-content" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <div>
+          <mat-form-field class="form-field">
+            <input matInput
+              type="email"
+              placeholder="e-mail"
+              formControlName="email">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="form-field">
+            <input matInput
+              type="password"
+              placeholder="password"
+              formControlName="password">
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-stroked-button
+            type="submit"
+            [disabled]="!form.valid">sign in</button>
+            <a href="javascript:void(0)" class="recover-password" (click)="lostPasswordClick()">lost password</a>
+        </div>
+      </form>
+      <div class="form-content">
+        <p class="center-text">or
+          <button mat-stroked-button
+            class="account-button"
+              color="accent"
+              (click)="registerClick()">create an account</button>
+        </p>
+      </div>
+    </div>
+    <div *ngIf="working">
+      <working-spinner></working-spinner>
+    </div>
+  </mat-card-content>
+</mat-card>

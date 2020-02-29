@@ -1,0 +1,24 @@
+<div *ngIf="transactions$ | async as transactions">
+  <div *ngIf="transactions.length === 0">
+    <mat-card class="card-holder">
+      <mat-card-content>
+        <div class="welcome-container">
+          <p>Welcome to Turtle fanny pack</p>
+          <img src="assets/images/turtlecoin_symbol_color@2x.png" alt="image">
+          <p>Your transaction history will appear here</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngFor="let tx of transactions; let i = index">
+    <div *ngIf="i === 0">
+      <p class="section-date">{{ tx.timestamp | date:'longDate' }}</p>
+    </div>
+    <div *ngIf="i > 0">
+      <div *ngIf="isNewTransactionDay(transactions[i-1], transactions[i])">
+        <p class="section-date">{{ tx.timestamp | date:'longDate' }}</p>
+      </div>
+    </div>
+    <transaction-list-item [transaction]="tx"></transaction-list-item>
+  </div>
+</div>

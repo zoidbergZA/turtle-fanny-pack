@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if request.auth.uid == userId;
+      allow write: if false;
+
+      match /accounts/{accountId} {
+      	allow read: if userId == request.auth.uid;
+      	allow write: if false;
+      }
+
+      match /transactions/{transactionId} {
+      	allow read: if userId == request.auth.uid;
+      	allow write: if false;
+      }
+
+      match /contacts/{contactId} {
+      	allow read: if userId == request.auth.uid;
+        allow write: if userId == request.auth.uid;
+      }
+    }
+    match /priceQuotes/{currency} {
+      allow read: if request.auth.uid != null;
+      allow write: if false;
+    }
+  }
+}

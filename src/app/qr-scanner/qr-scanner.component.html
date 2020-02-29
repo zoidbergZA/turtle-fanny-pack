@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="onCancelClick()"><mat-icon>clear</mat-icon></button>
+  <span> QR scanner</span>
+</mat-toolbar>
+<div class="canvas-container">
+  <zxing-scanner
+    [enable]="scannerEnabled"
+    (scanSuccess)="scanSuccessHandler($event)">
+  </zxing-scanner>
+</div>

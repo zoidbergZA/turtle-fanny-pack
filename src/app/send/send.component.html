@@ -1,0 +1,109 @@
+<div class="card-holder">
+  <mat-card class="page-card">
+    <div class="container">
+      <div class="page-title-small">send</div>
+      <!-- <div class="caution-box">
+        CAUTION: This app is in early development, only use small amounts for testing purposes. Turtle
+        fanny pack is not responsible for any loss of funds.
+      </div> -->
+      <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+      <div *ngIf="busy" class="busy-spinner">
+        <working-spinner></working-spinner>
+      </div>
+      <div *ngIf="waitForPin && !busy">
+        <div>
+          <pin-prompt title="enter pin" (pin)="onPinEnterred($event)"></pin-prompt>
+        </div>
+      </div>
+      <div *ngIf="!waitForPin">
+        <div *ngIf="!busy && preparedTx">
+          <table class="preview-table">
+            <tr>
+              <td class="table-key">address</td>
+              <td class="table-value">
+                <div class="address-field">{{ preparedTx?.address }}</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-key">amount</td>
+              <td class="table-value">{{ preparedTx?.amount | TRTL }}</td>
+            </tr>
+            <tr>
+              <td class="table-key">fees</td>
+              <td class="table-value">{{ preparedTx?.fees | TRTL }}</td>
+            </tr>
+          </table>
+          <div class="preview-actions">
+            <div>
+              <button mat-stroked-button (click)="onCancelClick()">cancel</button>
+            </div>
+            <div class="flex-spacer"></div>
+            <div>
+              <button mat-stroked-button color="accent" (click)="onSendClick()"><mat-icon>send</mat-icon> send</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="transaction" class="sent-box">
+          <div class="success-box">
+            <mat-icon color="accent">check_circle</mat-icon>
+            <span class="left-spacer">transaction successfully submitted!</span>
+          </div>
+          <div>
+            <table class="preview-table">
+              <tr>
+                <td class="table-key">ID</td>
+                <td class="table-value">
+                  <div class="address-field">{{ transaction?.id }}</div>
+                </td>
+              </tr>
+              <tr>
+                <td class="table-key">amount</td>
+                <td class="table-value">{{ transaction?.amount * -1 | TRTL }}</td>
+              </tr>
+              <tr>
+                <td class="table-key">fees</td>
+                <td class="table-value">{{ transaction?.fee | TRTL }}</td>
+              </tr>
+            </table>
+          </div>
+          <button mat-stroked-button (click)="homeClick()">
+            <mat-icon>home</mat-icon>
+            <span class="left-spacer"> home</span>
+          </button>
+        </div>
+        <div *ngIf="!busy && !preparedTx && !transaction">
+          <button mat-stroked-button (click)="onScanQrClick()">
+            <mat-icon>center_focus_weak</mat-icon>scan QR code</button>
+          <div>
+            <form class="form-content" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+              <div>
+                <mat-form-field appearance="outline" class="input-amount">
+                  <mat-label>Amount</mat-label>
+                  <input matInput currencyMask
+                    formControlName="amount">
+                </mat-form-field>
+              </div>
+              <div class="address-box">
+                <mat-form-field class="form-address">
+                  <mat-label>address</mat-label>
+                  <input matInput type="text" formControlName="sendAddress">
+                </mat-form-field>
+              </div>
+              <table *ngIf="total">
+                  <tr>
+                    <td class="table-key">Total</td>
+                    <td class="table-value">{{ total | TRTL }}</td>
+                  </tr>
+                </table>
+              <div>
+                <button mat-stroked-button
+                  type="submit"
+                  [disabled]="!form.valid">continue</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,23 @@
+<div class="card-holder">
+  <mat-card class="page-card">
+    <div class="container">
+      <div class="page-title-small">Set wallet pin</div>
+      <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+      <div *ngIf="busy" class="busy-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div *ngIf="!busy && !aborted">
+        <div *ngIf="!newPin">
+          <pin-prompt title="enter a new pin" (pin)="onNewPinEnterred($event)"></pin-prompt>
+        </div>
+        <div *ngIf="newPin">
+          <pin-prompt title="confirm new pin" (pin)="onConfirmPinEnterred($event)"></pin-prompt>
+        </div>
+      </div>
+      <div *ngIf="!busy && aborted">
+        <p>please try again later.</p>
+        <button mat-stroked-button (click)="onCloseClick()">close</button>
+      </div>
+    </div>
+  </mat-card>
+</div>

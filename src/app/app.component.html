@@ -1,0 +1,21 @@
+<div>
+  <div *ngIf="initialized; else loading">
+    <div>
+      <div *ngIf="authService.firebaseUser$ | async as authUser; else nouser">
+        <main-nav></main-nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <mat-spinner color="primary" class="loading-spinner"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #nouser>
+  <div class="no-user">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

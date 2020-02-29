@@ -1,0 +1,6 @@
+<div *ngIf="authService.walletUser$ | async as user">
+  <div *ngIf="account !== undefined">
+    <account-summary [account]="account"></account-summary>
+    <transaction-history [userId]="user?.id"></transaction-history>
+  </div>
+</div>

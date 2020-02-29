@@ -1,0 +1,99 @@
+<mat-card class="page-card">
+  <mat-card-title class="page-title center-text">Create new account</mat-card-title>
+  <mat-card-content>
+    <div *ngIf="!working">
+      <div *ngIf="!termsAgreed">
+        <form class="form-content" [formGroup]="termsForm" (ngSubmit)="onAgree()">
+          <table>
+            <tr>
+              <td class="table-key">
+                <mat-checkbox formControlName="term1" required></mat-checkbox>
+              </td>
+              <td class="table-value">
+                <span>I understand that this app is a web wallet, and is in control of my private keys/seed.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-key">
+                <mat-checkbox formControlName="term2" required></mat-checkbox>
+              </td>
+              <td class="table-value">
+                <span>I understand that network and service fees are charged when sending transactions.</span>
+              </td>
+            </tr>
+            <tr>
+            <tr>
+              <td class="table-key">
+                <mat-checkbox formControlName="term3" required></mat-checkbox>
+              </td>
+              <td class="table-value">
+                <span>I understand that this app is currently still in beta testing and should be used for experimental purposes only.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-key">
+                <mat-checkbox formControlName="term4" required></mat-checkbox>
+              </td>
+              <td class="table-value">
+                <span>I understand that no warranty or guarantee is provided, expressed, or implied when using this app and any funds lost in using this app are not the responsibility of the application creator, publisher, or distributor.</span>
+              </td>
+            </tr>
+          </table>
+          <div class="center-text">
+            <button mat-stroked-button
+              class="button"
+              type="submit"
+              [disabled]="!termsForm.valid">continue</button>
+          </div>
+        </form>
+        <!-- <div>
+          <button mat-stroked-button (click)="agreeClick()">I agree</button>
+        </div> -->
+      </div>
+      <div *ngIf="termsAgreed">
+        <form class="form-content" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+          <div>
+            <div>
+              <mat-form-field class="form-field">
+                <input matInput
+                  type="email"
+                  placeholder="e-mail"
+                  formControlName="email">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="form-field">
+                <input matInput
+                  minlength="6"
+                  type="password"
+                  placeholder="password"
+                  formControlName="password">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="form-field">
+                <input matInput
+                  minlength="6"
+                  type="password"
+                  placeholder="confirm password"
+                  formControlName="confirmPassword">
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <p class="error-text">{{ (status$ | async) }}</p>
+          </div>
+          <div class="center-text">
+            <button mat-stroked-button
+              class="button"
+              type="submit"
+              [disabled]="!form.valid || !checkPasswordMatch()">create account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="working">
+      <working-spinner></working-spinner>
+    </div>
+  </mat-card-content>
+</mat-card>

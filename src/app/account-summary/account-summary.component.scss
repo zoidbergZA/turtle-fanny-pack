@@ -1,0 +1,31 @@
+.balance-unlocked {
+  font-size: 1.8em;
+  font-weight: lighter;
+}
+.balance-locked {
+  font-size: 1.1em;
+  font-weight: lighter;
+}
+.balance-fiat {
+  margin-top: 10px;
+}
+.trends-container {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.trend-item {
+  margin-right: 15px;
+}
+.trend-up {
+  color: green;
+}
+.trend-flat {
+  color: black;
+}
+.trend-down {
+  color: red;
+}

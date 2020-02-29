@@ -1,0 +1,33 @@
+<div>
+  <form class="form-content" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <div>
+      <mat-form-field class="form-field">
+        <input matInput
+          type="text"
+          placeholder="name"
+          formControlName="name">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="form-field">
+        <input matInput
+          type="text"
+          placeholder="TRTL address"
+          formControlName="address">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="form-field">
+        <input matInput
+          type="email"
+          placeholder="e-mail"
+          formControlName="email">
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-stroked-button
+        type="submit"
+        [disabled]="!form.valid">done</button>
+    </div>
+  </form>
+</div>
