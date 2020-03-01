@@ -30,7 +30,7 @@ Turtle app secret: `firebase functions:config:set trtlapp.secret="YOUR APP SECRE
 ### Set the SendGrid API key
 
 `firebase functions:config:set sendgrid.apikey="YOUR API KEY"`
-`firebase functions:config:set sendgrid.resetpintemplate="YOUR API KEY"`
+`firebase functions:config:set sendgrid.resetpintemplate="TEMPLATE ID"`
 
 ### Set coinmarketcap API key
 
