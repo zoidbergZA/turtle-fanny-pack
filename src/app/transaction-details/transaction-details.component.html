@@ -1,3 +1,40 @@
-<div *ngIf="transaction">
-  {{ transaction.amount }}
+<div class="page-title-small center-text">Transaction details</div>
+<div class="content">
+  <div class="card-holder">
+    <mat-card>
+      <mat-card-content>
+        <div *ngIf="transaction">
+          <table class="info-table">
+            <tr>
+              <td class="table-key">date</td>
+              <td class="table-value">{{ transaction.timestamp | date:'short' }}</td>
+            </tr>
+            <tr>
+              <td class="table-key">amount</td>
+              <td class="table-value">{{ transaction.amount | TRTL }}</td>
+            </tr>
+            <tr *ngIf="transaction.amount < 0">
+              <td class="table-key">fee</td>
+              <td class="table-value">{{ transaction.fee | TRTL }}</td>
+            </tr>
+            <tr>
+              <td class="table-key">status</td>
+              <td class="table-value">
+                <span *ngIf="transaction.failed" class="error-text">FAILED</span>
+                <span *ngIf="!transaction.failed && transaction.confirmed">confirmed</span>
+                <span *ngIf="!transaction.failed && !transaction.confirmed">unconfirmed</span>
+              </td>
+            </tr>
+            <tr *ngIf="transaction.txHash">
+              <td class="table-key">hash</td>
+              <td class="table-value code-field">{{ transaction.txHash }}</td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="!transaction">
+          <p>Transaction not found</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
