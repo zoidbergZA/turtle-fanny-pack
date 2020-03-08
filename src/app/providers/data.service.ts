@@ -4,13 +4,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { Account, Transaction, PriceQuote, PreparedTransaction } from 'shared/types';
+import { Account, Transaction, PriceQuote } from 'shared/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   defaultAccount: Account | undefined;
+  selectedTransaction: Transaction | undefined;
 
   constructor(
     private authService: AuthService,

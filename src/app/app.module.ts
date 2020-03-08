@@ -48,6 +48,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ResetPinComponent } from './settings/reset-pin/reset-pin.component';
 import { WorkingSpinnerComponent } from './working-spinner/working-spinner.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -87,7 +88,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ResetPasswordComponent,
     SettingsComponent,
     ResetPinComponent,
-    WorkingSpinnerComponent
+    WorkingSpinnerComponent,
+    TransactionDetailsComponent
   ],
   imports: [
     BrowserModule,

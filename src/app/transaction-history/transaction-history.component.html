@@ -19,6 +19,6 @@
         <p class="section-date">{{ tx.timestamp | date:'longDate' }}</p>
       </div>
     </div>
-    <transaction-list-item [transaction]="tx"></transaction-list-item>
+    <transaction-list-item [transaction]="tx" (click)="txDetailsClick(tx)"></transaction-list-item>
   </div>
 </div>

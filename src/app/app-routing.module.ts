@@ -16,6 +16,7 @@ import { QrScannerComponent } from './qr-scanner/qr-scanner.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ResetPinComponent } from './settings/reset-pin/reset-pin.component';
+import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 
 const redirectUnauthorizedToSignIn  = () => redirectUnauthorizedTo(['/signin']);
 const redirectLoggedInToDashboard   = () => redirectLoggedInTo(['/dashboard']);
@@ -66,6 +67,12 @@ const routes: Routes = [
   {
     path:         'scanner',
     component:    QrScannerComponent,
+    canActivate:  [AngularFireAuthGuard],
+    data:         { authGuardPipe: redirectUnauthorizedToSignIn }
+  },
+  {
+    path:         'transaction-details',
+    component:    TransactionDetailsComponent,
     canActivate:  [AngularFireAuthGuard],
     data:         { authGuardPipe: redirectUnauthorizedToSignIn }
   },

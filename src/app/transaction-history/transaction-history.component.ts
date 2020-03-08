@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaction } from 'shared/types';
 import { DataService } from '../providers/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,7 +18,9 @@ export class TransactionHistoryComponent implements OnInit {
   transactions$: Observable<Transaction[]> | undefined;
   txDayTracker = -1;
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private dataService: DataService,
+    private router: Router) { }
 
   ngOnInit() {
     if (!this.userId) {
@@ -34,5 +37,10 @@ export class TransactionHistoryComponent implements OnInit {
 
   isNewTransactionDay(txPrevious: Transaction, txCurrent: Transaction): boolean {
     return new Date(txPrevious.timestamp).getDay() !== new Date(txCurrent.timestamp).getDay();
+  }
+
+  txDetailsClick(transaction: Transaction) {
+    this.dataService.selectedTransaction = transaction;
+    this.router.navigateByUrl('/transaction-details');
   }
 }
