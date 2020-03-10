@@ -83,6 +83,10 @@
                     formControlName="amount">
                 </mat-form-field>
               </div>
+              <div *ngIf="contact" class="contact-title">
+                <mat-icon color="primary">perm_contact_calendar</mat-icon>
+                <span class="contact-title-text">{{ contact?.name }}</span>
+              </div>
               <div class="address-box">
                 <mat-form-field class="form-address">
                   <mat-label>address</mat-label>

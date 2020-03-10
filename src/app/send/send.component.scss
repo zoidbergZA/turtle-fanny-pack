@@ -55,3 +55,13 @@
 .flex-spacer {
   flex-grow: 1;
 }
+.contact-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.contact-title-text {
+  margin-left: 5px;
+  font-size: 0.9em;
+  color: grey;
+}

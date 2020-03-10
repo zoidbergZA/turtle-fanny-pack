@@ -4,9 +4,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utilities } from '../utilities';
 import { AccountService } from '../providers/account.service';
 import { Router, ParamMap, ActivatedRoute } from '@angular/router';
-import { PreparedTransaction, Transaction } from 'shared/types';
+import { PreparedTransaction, Transaction, Contact } from 'shared/types';
 import { AuthService } from '../providers/auth.service';
 import { AnalyticsService } from '../providers/analytics.service';
+import { ContactsService } from '../providers/contacts.service';
 
 @Component({
   selector: 'app-send',
@@ -23,6 +24,8 @@ export class SendComponent implements OnInit {
   waitForPin = false;
   preparedTx: PreparedTransaction | undefined;
   transaction: Transaction | undefined;
+  contacts: Contact[] = [];
+  contact: Contact | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +33,8 @@ export class SendComponent implements OnInit {
     private authService: AuthService,
     private dataService: DataService,
     private accountService: AccountService,
-    private analyticsService: AnalyticsService) {
+    private analyticsService: AnalyticsService,
+    private contactsService: ContactsService) {
 
     this.form = new FormGroup({
       amount: new FormControl('', Validators.compose([
@@ -44,6 +48,16 @@ export class SendComponent implements OnInit {
     this.form.controls.amount.valueChanges.subscribe(v => {
       this.amountAtomic = Utilities.getAtomicUnits(v);
       this.calculateTotal();
+    });
+
+    this.form.controls.sendAddress.valueChanges.subscribe(v => {
+      this.contact = this.contacts.find(c => c.address === v);
+    });
+
+    this.contactsService.getContacts$().subscribe(contacts => {
+     this.contacts  = contacts;
+     const address  = this.form.controls.sendAddress.value;
+     this.contact   = this.contacts.find(c => c.address === address);
     });
   }
 
