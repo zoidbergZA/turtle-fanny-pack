@@ -10,6 +10,7 @@ import { AuthService } from './providers/auth.service';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAnalyticsModule, ScreenTrackingService } from '@angular/fire/analytics';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -98,6 +99,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
     AngularFireFunctionsModule,
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
@@ -111,6 +113,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
   providers: [
     AngularFireAuthGuard,
+    ScreenTrackingService,
     AuthService,
     DataService,
     AccountService,
