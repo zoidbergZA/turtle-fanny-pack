@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 
-export type AnalyticsEventName = 'preparedTx' | 'sentTx';
+export type AnalyticsEventName =  'preparedTx'    |
+                                  'sentTx'        |
+                                  'resetPassword' |
+                                  'resetPin'      |
+                                  'accountCreated';
 
 @Injectable({
   providedIn: 'root'

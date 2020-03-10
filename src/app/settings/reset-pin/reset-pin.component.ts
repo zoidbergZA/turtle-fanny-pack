@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/providers/auth.service';
 import { Router } from '@angular/router';
+import { AnalyticsService } from 'src/app/providers/analytics.service';
 
 @Component({
   selector: 'reset-pin',
@@ -16,7 +17,8 @@ export class ResetPinComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private analytics: AnalyticsService) {
 
     if (this.authService.walletUser) {
       this.email = this.authService.walletUser.email;
@@ -33,6 +35,8 @@ export class ResetPinComponent implements OnInit {
     try {
       await this.authService.resetPinEmail();
       this.sent = true;
+
+      this.analytics.logEvent('resetPin');
     } catch (error) {
       this.errorMessage = error;
     } finally {

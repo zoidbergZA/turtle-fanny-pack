@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../providers/auth.service';
 import { Router } from '@angular/router';
+import { AnalyticsService } from '../providers/analytics.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -20,7 +21,11 @@ export class RegisterComponent implements OnInit {
   working = false;
   continue: string | undefined;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private analytics: AnalyticsService) {
+
     this.termsForm = new FormGroup({
       term1: new FormControl(false, Validators.required),
       term2: new FormControl(false, Validators.required),
@@ -55,8 +60,9 @@ export class RegisterComponent implements OnInit {
     this.auth.createUserWithEmailAndPassword(result.email, result.password)
     .then(_ => {
       self.working = false;
+      this.analytics.logEvent('accountCreated');
+
       this.router.navigate(['/dashboard']);
-      console.log('successful sign-in');
     })
     .catch(err => {
       self.working = false;

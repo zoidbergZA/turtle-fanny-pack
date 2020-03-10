@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../providers/auth.service';
 import { Router } from '@angular/router';
+import { AnalyticsService } from '../providers/analytics.service';
 
 @Component({
   selector: 'reset-password',
@@ -16,7 +17,11 @@ export class ResetPasswordComponent implements OnInit {
   address: string | undefined;
   errorMessage: string | undefined;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private analytics: AnalyticsService) {
+
     this.form = new FormGroup({
       email: new FormControl('', Validators.compose([
         Validators.required
@@ -37,6 +42,8 @@ export class ResetPasswordComponent implements OnInit {
       this.errorMessage = undefined;
       this.sent         = true;
       this.address      = result.email;
+
+      this.analytics.logEvent('resetPassword');
     })
     .catch(error => {
       this.errorMessage = error.message;
