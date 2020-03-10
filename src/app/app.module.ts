@@ -50,6 +50,7 @@ import { ResetPinComponent } from './settings/reset-pin/reset-pin.component';
 import { WorkingSpinnerComponent } from './working-spinner/working-spinner.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { AnalyticsService } from './providers/analytics.service';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -114,10 +115,12 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   providers: [
     AngularFireAuthGuard,
     ScreenTrackingService,
+    // UserTrackingService,
     AuthService,
     DataService,
     AccountService,
     ContactsService,
+    AnalyticsService,
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
   bootstrap: [AppComponent]

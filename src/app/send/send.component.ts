@@ -6,6 +6,7 @@ import { AccountService } from '../providers/account.service';
 import { Router, ParamMap, ActivatedRoute } from '@angular/router';
 import { PreparedTransaction, Transaction } from 'shared/types';
 import { AuthService } from '../providers/auth.service';
+import { AnalyticsService } from '../providers/analytics.service';
 
 @Component({
   selector: 'app-send',
@@ -22,15 +23,14 @@ export class SendComponent implements OnInit {
   waitForPin = false;
   preparedTx: PreparedTransaction | undefined;
   transaction: Transaction | undefined;
-  // state: 'prepare' | 'confirm' | 'pin' = 'prepare';
-
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private dataService: DataService,
-    private accountService: AccountService) {
+    private accountService: AccountService,
+    private analyticsService: AnalyticsService) {
 
     this.form = new FormGroup({
       amount: new FormControl('', Validators.compose([
@@ -94,8 +94,15 @@ export class SendComponent implements OnInit {
 
       if (verified) {
         this.transaction = await this.accountService.send(this.preparedTx.id, pin);
-        this.preparedTx = undefined;
         this.waitForPin = false;
+
+        this.analyticsService.logEvent('sentTx', {
+          preparedTxId: this.preparedTx.id,
+          amount: this.preparedTx.amount,
+          fees: this.preparedTx.fees
+        });
+
+        this.preparedTx = undefined;
       } else {
         this.errorMessage = 'invalid pin';
       }
@@ -136,6 +143,12 @@ export class SendComponent implements OnInit {
 
     try {
       this.preparedTx = await this.accountService.prepareSend(account.id, atomicUnits, sendAddress);
+
+      this.analyticsService.logEvent('preparedTx', {
+        preparedTxId: this.preparedTx.id,
+        amount: this.preparedTx.amount,
+        fees: this.preparedTx.fees
+      });
     } catch (error) {
       this.errorMessage = this.errorMessage = error.message;
     } finally {
