@@ -4,7 +4,7 @@
 </div>
 <div class="y-spacer"></div>
 <div class="content-box">
-  <div *ngFor="let contact of contacts$ | async">
+  <div *ngFor="let contact of contacts$ | async" class="content-box">
     <contact-list-item [contact]="contact" (selected)="onContactSelected($event)"></contact-list-item>
   </div>
 </div>

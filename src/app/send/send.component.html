@@ -48,6 +48,15 @@
             <mat-icon color="accent">check_circle</mat-icon>
             <span class="left-spacer">transaction successfully submitted!</span>
           </div>
+          <div *ngIf="!contact">
+            <span>Save address to contacts?</span>
+            <button
+              mat-stroked-button
+              class="save-contact-btn"
+              color="primary"
+              (click)="onAddContactClick()">
+              <mat-icon>perm_contact_calendar</mat-icon>save contact</button>
+          </div>
           <div>
             <table class="preview-table">
               <tr>

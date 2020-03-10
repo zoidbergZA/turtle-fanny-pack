@@ -26,6 +26,7 @@ export class SendComponent implements OnInit {
   transaction: Transaction | undefined;
   contacts: Contact[] = [];
   contact: Contact | undefined;
+  destination: string | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -109,6 +110,7 @@ export class SendComponent implements OnInit {
       if (verified) {
         this.transaction = await this.accountService.send(this.preparedTx.id, pin);
         this.waitForPin = false;
+        this.destination = this.preparedTx.address;
 
         this.analyticsService.logEvent('sentTx', {
           preparedTxId: this.preparedTx.id,
@@ -136,6 +138,7 @@ export class SendComponent implements OnInit {
   async onSubmit(data: any) {
     this.errorMessage = undefined;
     this.preparedTx = undefined;
+    this.destination = undefined;
 
     const amount: number = data.amount;
     const atomicUnits = Utilities.getAtomicUnits(amount);
@@ -191,5 +194,13 @@ export class SendComponent implements OnInit {
     }
 
     this.waitForPin = true;
+  }
+
+  onAddContactClick() {
+    if (!this.destination) {
+      return;
+    }
+
+    this.router.navigateByUrl(`contacts/new/${this.destination}`);
   }
 }

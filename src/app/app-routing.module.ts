@@ -101,7 +101,7 @@ const routes: Routes = [
     data:         { authGuardPipe: redirectUnauthorizedToSignIn }
   },
   {
-    path:         'contacts/new',
+    path:         'contacts/new/:address',
     component:    NewContactComponent,
     canActivate:  [AngularFireAuthGuard],
     data:         { authGuardPipe: redirectUnauthorizedToSignIn }

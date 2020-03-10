@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'shared/types';
 import { ContactsService } from 'src/app/providers/contacts.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-contact',
@@ -14,8 +14,12 @@ export class NewContactComponent implements OnInit {
   contact: Contact;
   busy = false;
 
-  constructor(private contactsService: ContactsService, private router: Router) {
-    this.contact = {
+  constructor(
+    private route: ActivatedRoute,
+    private contactsService: ContactsService,
+    private router: Router) {
+
+      this.contact = {
       id: '',
       name: '',
       address: '',
@@ -24,6 +28,13 @@ export class NewContactComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const address = params.get('address');
+
+      if (address) {
+        this.contact.address = address;
+      }
+    });
   }
 
   async createContact(contact: Contact) {
