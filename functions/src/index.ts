@@ -554,6 +554,7 @@ async function sendPreparedTransaction(preparedTx: PreparedTransaction): Promise
       preparedTx.userId,
       preparedTx.accountId,
       preparedTx.recipientAccountId,
+      preparedTx.address,
       preparedTx.amount);
   } else if (sendType === 'withdrawal') {
     return await accountWithdrawToAddress(preparedTx);
@@ -589,6 +590,7 @@ async function accountWithdrawToAddress(preparedTx: PreparedTransaction): Promis
     transferType:   preparedTx.transferType,
     amount:         -preparedTx.amount,
     fee:            preparedTx.fees,
+    sendAddress:    preparedTx.address,
     confirmed:      false,
     failed:         withdrawal.failed,
     withdrawalId:   withdrawal.id
@@ -613,6 +615,7 @@ async function interAccountTransfer(
   sendingUserId: string,
   sendingAccountId: string,
   receivingAccountId: string,
+  receivingAddress: string,
   amount: number): Promise<[Transaction | undefined, AppError | undefined]> {
 
   console.log(`recipient has an account with id: ${receivingAccountId}, do account transfer`);
@@ -645,6 +648,7 @@ async function interAccountTransfer(
     transferType:       'account',
     amount:             -amount,
     fee:                0,
+    sendAddress:        receivingAddress,
     confirmed:          true,
     failed:             false,
     accountTransferId:  transfer.id

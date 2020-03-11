@@ -64,6 +64,7 @@ export interface Transaction {
   fee: number;
   confirmed: boolean;
   failed: boolean;
+  sendAddress?: string;
   depositId?: string;
   withdrawalId?: string;
   accountTransferId?: string;

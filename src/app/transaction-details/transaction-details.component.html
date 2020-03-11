@@ -17,6 +17,10 @@
               <td class="table-key">fee</td>
               <td class="table-value">{{ transaction.fee | TRTL }}</td>
             </tr>
+            <tr *ngIf="transaction.sendAddress">
+              <td class="table-key">address</td>
+              <td class="table-value code-text">{{ transaction.sendAddress }}</td>
+            </tr>
             <tr>
               <td class="table-key">status</td>
               <td class="table-value">
@@ -27,7 +31,7 @@
             </tr>
             <tr *ngIf="transaction.txHash">
               <td class="table-key">hash</td>
-              <td class="table-value code-field">{{ transaction.txHash }}</td>
+              <td class="table-value code-text">{{ transaction.txHash }}</td>
             </tr>
           </table>
         </div>
