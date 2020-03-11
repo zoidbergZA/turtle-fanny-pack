@@ -62,6 +62,14 @@ export class MainNavComponent {
     this.router.navigateByUrl('/settings');
   }
 
+  infoClick() {
+    if (this.sidenav && this.isHandset) {
+      this.sidenav.close();
+    }
+
+    this.router.navigateByUrl('/info');
+  }
+
   sendClick() {
     this.router.navigateByUrl('/send/');
   }

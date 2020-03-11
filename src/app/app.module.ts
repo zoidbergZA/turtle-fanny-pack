@@ -51,6 +51,7 @@ import { WorkingSpinnerComponent } from './working-spinner/working-spinner.compo
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 import { AnalyticsService } from './providers/analytics.service';
+import { GeneralInfoComponent } from './general-info/general-info.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -91,7 +92,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     SettingsComponent,
     ResetPinComponent,
     WorkingSpinnerComponent,
-    TransactionDetailsComponent
+    TransactionDetailsComponent,
+    GeneralInfoComponent
   ],
   imports: [
     BrowserModule,

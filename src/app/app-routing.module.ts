@@ -17,6 +17,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SettingsComponent } from './settings/settings.component';
 import { ResetPinComponent } from './settings/reset-pin/reset-pin.component';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { GeneralInfoComponent } from './general-info/general-info.component';
 
 const redirectUnauthorizedToSignIn  = () => redirectUnauthorizedTo(['/signin']);
 const redirectLoggedInToDashboard   = () => redirectLoggedInTo(['/dashboard']);
@@ -49,6 +50,12 @@ const routes: Routes = [
   {
     path:         'dashboard',
     component:    DashboardComponent,
+    canActivate:  [AngularFireAuthGuard],
+    data:         { authGuardPipe: redirectUnauthorizedToSignIn }
+  },
+  {
+    path:         'info',
+    component:    GeneralInfoComponent,
     canActivate:  [AngularFireAuthGuard],
     data:         { authGuardPipe: redirectUnauthorizedToSignIn }
   },
