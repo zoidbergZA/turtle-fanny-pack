@@ -21,7 +21,7 @@ export class ContactsComponent implements OnInit {
   }
 
   onAddContactClick() {
-    this.router.navigateByUrl('/contacts/new');
+    this.router.navigateByUrl('/contacts/new/');
   }
 
   onContactSelected(contact: Contact) {
