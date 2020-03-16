@@ -1,38 +1,41 @@
-<div class="page-title-small center-text">Contact details</div>
-<div *ngIf="contact$ | async as contact">
-  <div class="content">
-    <div class="card-holder">
-      <mat-card>
-        <mat-card-content>
-          <table class="info-table">
-            <tr>
-              <td class="table-key">name</td>
-              <td class="table-value">{{ contact?.name }}</td>
-            </tr>
-            <tr>
-              <td class="table-key">TRTL address</td>
-              <td class="table-value">
-                <div class="address-field">{{ contact?.address }}</div>
-              </td>
-            </tr>
-            <tr *ngIf="contact.email">
-              <td class="table-key">email</td>
-              <td class="table-value">{{ contact?.email }}</td>
-            </tr>
-          </table>
-          <div class="actions-bar">
-            <button mat-stroked-button
-              class="action-button"
-              (click)="editClick(contact.id)"><mat-icon>edit</mat-icon>edit
-            </button>
-            <button mat-stroked-button
-              color="accent"
-              class="action-button" (click)="sendClick(contact.address)">
-              <mat-icon>arrow_upward</mat-icon>send
-            </button>
-          </div>
-        </mat-card-content>
-      </mat-card>
+<div class="page-content">
+  <div class="page-title-small center-text">Contact details</div>
+  <div *ngIf="contact$ | async as contact">
+    <div class="content">
+      <div class="card-holder">
+        <mat-card>
+          <mat-card-content>
+            <table class="info-table">
+              <tr>
+                <td class="table-key">name</td>
+                <td class="table-value">{{ contact?.name }}</td>
+              </tr>
+              <tr>
+                <td class="table-key">TRTL address</td>
+                <td class="table-value">
+                  <copy-string-box [data]="contact?.address"></copy-string-box>
+                  <!-- <div class="address-field">{{ contact?.address }}</div> -->
+                </td>
+              </tr>
+              <tr *ngIf="contact.email">
+                <td class="table-key">email</td>
+                <td class="table-value">{{ contact?.email }}</td>
+              </tr>
+            </table>
+            <div class="actions-bar">
+              <button mat-stroked-button
+                class="action-button"
+                (click)="editClick(contact.id)"><mat-icon>edit</mat-icon>edit
+              </button>
+              <button mat-stroked-button
+                color="accent"
+                class="action-button" (click)="sendClick(contact.address)">
+                <mat-icon>arrow_upward</mat-icon>send
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

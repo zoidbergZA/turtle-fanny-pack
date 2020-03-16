@@ -1,16 +1,18 @@
-<div class="page-title-small center-text">new contact</div>
-<div class="card-holder">
-  <mat-card>
-    <mat-card-content>
-      <div *ngIf="errorMessage">
-        <p class="error-text">{{ errorMessage }}</p>
-      </div>
-      <div *ngIf="busy">
-        <mat-spinner diameter="64"></mat-spinner>
-      </div>
-      <div *ngIf="!busy">
-        <edit-contact-form [contact]="contact" (done)="createContact($event)"></edit-contact-form>
-      </div>
-    </mat-card-content>
-  </mat-card>
+<div class="page-content">
+  <div class="page-title-small center-text">new contact</div>
+  <div class="card-holder">
+    <mat-card>
+      <mat-card-content>
+        <div *ngIf="errorMessage">
+          <p class="error-text">{{ errorMessage }}</p>
+        </div>
+        <div *ngIf="busy">
+          <mat-spinner diameter="64"></mat-spinner>
+        </div>
+        <div *ngIf="!busy">
+          <edit-contact-form [contact]="contact" (done)="createContact($event)"></edit-contact-form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
