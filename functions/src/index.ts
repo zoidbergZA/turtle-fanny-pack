@@ -305,12 +305,12 @@ exports.processResetPin = functions.https.onRequest(async (request, response) =>
   const now = Date.now();
 
   if (pinRequest.consumed) {
-    response.status(400).send('ERROR');
+    response.status(400).send('expired.');
     return;
   }
 
   if (now > expireDate) {
-    response.status(400).send('ERROR');
+    response.status(400).send('expired.');
     return;
   }
 
@@ -324,11 +324,11 @@ exports.processResetPin = functions.https.onRequest(async (request, response) =>
 
   await Promise.all([
     pinRequestDocRef.update(pinReqUpdate),
-    admin.firestore().doc(`users/${pinRequest.userId}`).update(userUpdate),
-    admin.auth().revokeRefreshTokens(pinRequest.userId)
+    admin.firestore().doc(`users/${pinRequest.userId}`).update(userUpdate)
+    // admin.auth().revokeRefreshTokens(pinRequest.userId)
   ]);
 
-  response.status(200).send('ok');
+  response.status(200).send('PIN successfully reset.');
 });
 
 
