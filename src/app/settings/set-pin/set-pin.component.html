@@ -6,7 +6,7 @@
       <div *ngIf="busy" class="busy-spinner">
         <working-spinner></working-spinner>
       </div>
-      <div *ngIf="!busy && !aborted">
+      <div *ngIf="!busy && !aborted && !succeeded">
         <div *ngIf="!newPin">
           <pin-prompt title="enter a new pin" (pin)="onNewPinEnterred($event)"></pin-prompt>
         </div>
@@ -18,6 +18,11 @@
         <p>please try again later.</p>
         <button mat-stroked-button (click)="onCloseClick()">close</button>
       </div>
+      <div *ngIf="!busy && succeeded">
+        <p>Wallet pin successfully set.</p>
+        <button mat-stroked-button (click)="onCloseClick()">done</button>
+      </div>
     </div>
+    <div class="spacer"></div>
   </mat-card>
 </div>

@@ -13,11 +13,14 @@ export class SetPinComponent implements OnInit {
   errorMessage: string | undefined;
   busy = false;
   aborted = false;
+  succeeded = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    // TODO: check if user already has a pin and route away
+    if (this.authService.walletUser && this.authService.walletUser.hasPin) {
+      this.router.navigateByUrl('/');
+    }
   }
 
   onNewPinEnterred(pin: string) {
@@ -41,7 +44,7 @@ export class SetPinComponent implements OnInit {
         const success = await this.authService.setPin(pin);
 
         if (success) {
-          this.router.navigateByUrl('/');
+          this.succeeded = true;
         } else {
           this.errorMessage = 'An error occured.';
           this.aborted = true;
@@ -59,6 +62,7 @@ export class SetPinComponent implements OnInit {
 
   reset() {
     this.aborted = false;
+    this.succeeded = false;
     this.newPin = undefined;
     this.errorMessage = undefined;
   }
