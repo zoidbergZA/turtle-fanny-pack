@@ -16,6 +16,7 @@ import { ContactsService } from '../providers/contacts.service';
 })
 export class SendComponent implements OnInit {
   errorMessage: string | undefined;
+  recipientName: string | undefined;
   form: FormGroup;
   amountAtomic: number | undefined;
   fee: number | undefined;
@@ -75,6 +76,19 @@ export class SendComponent implements OnInit {
         this.form.controls.sendAddress.setValue(address);
       } else {
         this.form.controls.sendAddress.setValue('');
+      }
+    });
+
+    this.route.queryParams.subscribe(params => {
+      const paymentId: string | undefined = params.paymentid;
+      const sendAmount = +params.amount || 0;
+
+      this.recipientName = params.name;
+      this.form.controls.amount.setValue(sendAmount);
+
+      if (paymentId) {
+        // TODO: handle paymentId provided case, show currently not supported warning.
+        console.log(`payment ID's are not currently supported.`);
       }
     });
   }

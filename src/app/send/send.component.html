@@ -6,6 +6,7 @@
         CAUTION: This app is in early development, only use small amounts for testing purposes. Turtle
         fanny pack is not responsible for any loss of funds.
       </div> -->
+      <p *ngIf="recipientName" class="recipient">{{ recipientName }}</p>
       <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
       <div *ngIf="busy" class="busy-spinner">
         <working-spinner></working-spinner>
