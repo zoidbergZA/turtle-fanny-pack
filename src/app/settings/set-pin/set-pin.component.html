@@ -4,7 +4,7 @@
       <div class="page-title-small">Set wallet pin</div>
       <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
       <div *ngIf="busy" class="busy-spinner">
-        <mat-spinner></mat-spinner>
+        <working-spinner></working-spinner>
       </div>
       <div *ngIf="!busy && !aborted">
         <div *ngIf="!newPin">

@@ -42,6 +42,18 @@ const routes: Routes = [
     data:         { authGuardPipe: redirectLoggedInToDashboard }
   },
   {
+    path:         'settings/set-pin',
+    component:    SetPinComponent,
+    canActivate:  [AngularFireAuthGuard],
+    data:         { authGuardPipe: redirectUnauthorizedToSignIn }
+  },
+  {
+    path:         'settings/reset-pin',
+    component:    ResetPinComponent,
+    canActivate:  [AngularFireAuthGuard],
+    data:         { authGuardPipe: redirectUnauthorizedToSignIn }
+  },
+  {
     path:         'resetpassword',
     component:    ResetPasswordComponent,
     canActivate:  [AngularFireAuthGuard],
@@ -86,18 +98,6 @@ const routes: Routes = [
   {
     path:         'settings',
     component:    SettingsComponent,
-    canActivate:  [AngularFireAuthGuard],
-    data:         { authGuardPipe: redirectUnauthorizedToSignIn }
-  },
-  {
-    path:         'settings/set-pin',
-    component:    SetPinComponent,
-    canActivate:  [AngularFireAuthGuard],
-    data:         { authGuardPipe: redirectUnauthorizedToSignIn }
-  },
-  {
-    path:         'settings/reset-pin',
-    component:    ResetPinComponent,
     canActivate:  [AngularFireAuthGuard],
     data:         { authGuardPipe: redirectUnauthorizedToSignIn }
   },

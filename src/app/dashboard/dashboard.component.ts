@@ -3,9 +3,9 @@ import { DataService } from '../providers/data.service';
 import { SubscriptionLike } from 'rxjs';
 import { Account } from 'shared/types';
 import { AuthService } from '../providers/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
@@ -13,13 +13,21 @@ import { AuthService } from '../providers/auth.service';
 export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
-    private dataService: DataService) { }
+    private dataService: DataService,
+    private router: Router) { }
 
   account: Account | undefined;
-  subscription: SubscriptionLike | undefined;
+  userSubscription: SubscriptionLike | undefined;
+  accountSubscription: SubscriptionLike | undefined;
 
   ngOnInit() {
-    this.subscription = this.dataService.getAccount$().subscribe(account => {
+    this.userSubscription = this.authService.walletUser$.subscribe(user => {
+      if (user && !user.hasPin) {
+        this.router.navigateByUrl('settings/set-pin');
+      }
+    });
+
+    this.accountSubscription = this.dataService.getAccount$().subscribe(account => {
       this.account = account;
 
       if (account) {
@@ -29,8 +37,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+
+    if (this.accountSubscription) {
+      this.accountSubscription.unsubscribe();
     }
   }
 }

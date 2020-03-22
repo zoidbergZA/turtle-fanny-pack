@@ -1,12 +1,10 @@
-<div class="page-content">
-  <div class="page-title-small center-text">Address book</div>
-  <div class="content-box">
-    <button mat-stroked-button color="primary" (click)="onAddContactClick()"><mat-icon>add</mat-icon>add contact</button>
-  </div>
-  <div class="y-spacer"></div>
-  <div class="content-box">
-    <div *ngFor="let contact of contacts$ | async" class="content-box">
-      <contact-list-item [contact]="contact" (selected)="onContactSelected($event)"></contact-list-item>
-    </div>
+<div class="page-title-small center-text">Address book</div>
+<div class="content-box">
+  <button mat-stroked-button color="primary" (click)="onAddContactClick()"><mat-icon>add</mat-icon>add contact</button>
+</div>
+<div class="y-spacer"></div>
+<div>
+  <div *ngFor="let contact of contacts$ | async" class="content-box">
+    <contact-list-item [contact]="contact" (selected)="onContactSelected($event)"></contact-list-item>
   </div>
 </div>
