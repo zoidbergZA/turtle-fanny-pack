@@ -9,7 +9,7 @@
       <p *ngIf="recipientName" class="recipient">{{ recipientName }}</p>
       <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
       <div *ngIf="busy" class="busy-spinner">
-        <working-spinner></working-spinner>
+        <working-spinner [title]="busyMessage"></working-spinner>
       </div>
       <div *ngIf="waitForPin && !busy">
         <div>

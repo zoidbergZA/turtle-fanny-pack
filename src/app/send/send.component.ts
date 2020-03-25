@@ -22,6 +22,7 @@ export class SendComponent implements OnInit {
   fee: number | undefined;
   total: number | undefined;
   busy = false;
+  busyMessage: string | undefined;
   waitForPin = false;
   preparedTx: PreparedTransaction | undefined;
   transaction: Transaction | undefined;
@@ -115,8 +116,9 @@ export class SendComponent implements OnInit {
       return;
     }
 
-    this.busy = true;
     this.errorMessage = undefined;
+    this.busy = true;
+    this.busyMessage = 'sending transaction...';
 
     try {
       const verified = await this.authService.verifyPin(pin);
@@ -142,6 +144,7 @@ export class SendComponent implements OnInit {
       this.preparedTx = undefined;
     } finally {
       this.busy = false;
+      this.busyMessage = undefined;
     }
   }
 
@@ -171,6 +174,7 @@ export class SendComponent implements OnInit {
     }
 
     this.busy = true;
+    this.busyMessage = 'preparing transaction...';
 
     try {
       this.preparedTx = await this.accountService.prepareSend(account.id, atomicUnits, sendAddress);
@@ -184,6 +188,7 @@ export class SendComponent implements OnInit {
       this.errorMessage = this.errorMessage = error.message;
     } finally {
       this.busy = false;
+      this.busyMessage = undefined;
     }
   }
 
