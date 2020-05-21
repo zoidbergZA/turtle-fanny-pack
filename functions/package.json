@@ -19,7 +19,7 @@
     "crypto": "^1.0.1",
     "firebase-admin": "^8.6.0",
     "firebase-functions": "^3.3.0",
-    "trtl-apps": "^0.8.3"
+    "trtl-apps": "^0.10.0"
   },
   "devDependencies": {
     "tslint": "^5.12.0",
