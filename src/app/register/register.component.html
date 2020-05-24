@@ -1,7 +1,12 @@
 <mat-card class="page-card">
   <mat-card-title class="page-title center-text">Create new account</mat-card-title>
   <mat-card-content>
-    <div *ngIf="!working">
+    <div class="y-spacer"></div>
+    <p>
+      This app is currently closed for registration and used for DEMO purposes only.
+    </p>
+
+    <!-- <div *ngIf="!working">
       <div *ngIf="!termsAgreed">
         <form class="form-content" [formGroup]="termsForm" (ngSubmit)="onAgree()">
           <table>
@@ -46,9 +51,6 @@
               [disabled]="!termsForm.valid">continue</button>
           </div>
         </form>
-        <!-- <div>
-          <button mat-stroked-button (click)="agreeClick()">I agree</button>
-        </div> -->
       </div>
       <div *ngIf="termsAgreed">
         <form class="form-content" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
@@ -94,6 +96,6 @@
     </div>
     <div *ngIf="working">
       <working-spinner></working-spinner>
-    </div>
+    </div> -->
   </mat-card-content>
 </mat-card>
